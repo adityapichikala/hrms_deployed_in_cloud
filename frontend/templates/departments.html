@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Departments - HRMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Departments</h1>
+    <a href="{{ url_for('add_department') }}" class="btn btn-primary">➕ Add Department</a>
+</div>
+
+{% if departments %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dept in departments %}
+            <tr>
+                <td>{{ dept.id }}</td>
+                <td><strong>{{ dept.name }}</strong></td>
+                <td>{{ dept.description or 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-icon">📂</div>
+    <h3>No departments found</h3>
+    <p>Get started by creating your first department</p>
+    <a href="{{ url_for('add_department') }}" class="btn btn-primary">Add Department</a>
+</div>
+{% endif %}
+{% endblock %}

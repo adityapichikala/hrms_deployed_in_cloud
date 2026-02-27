@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Employees - HRMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Employees</h1>
+    <a href="{{ url_for('add_employee') }}" class="btn btn-primary">➕ Add Employee</a>
+</div>
+
+{% if employees %}
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Joined Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in employees %}
+            <tr>
+                <td>{{ emp.id }}</td>
+                <td><strong>{{ emp.full_name }}</strong></td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.role }}</td>
+                <td>{{ emp.department_name }}</td>
+                <td>
+                    {% if emp.is_active %}
+                    <span class="badge badge-active">Active</span>
+                    {% else %}
+                    <span class="badge badge-inactive">Inactive</span>
+                    {% endif %}
+                </td>
+                <td>{{ emp.joined_date[:10] if emp.joined_date else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-icon">👥</div>
+    <h3>No employees found</h3>
+    <p>Get started by adding your first employee</p>
+    <a href="{{ url_for('add_employee') }}" class="btn btn-primary">Add Employee</a>
+</div>
+{% endif %}
+{% endblock %}

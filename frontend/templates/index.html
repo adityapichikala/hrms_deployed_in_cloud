@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}HRMS Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Welcome to HRMS Dashboard</h1>
+    <p class="subtitle">Human Resource Management System</p>
+
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-icon">🏢</div>
+            <div class="stat-content">
+                <h3>{{ dept_count }}</h3>
+                <p>Departments</p>
+            </div>
+            <a href="{{ url_for('departments') }}" class="stat-link">View All →</a>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-content">
+                <h3>{{ emp_count }}</h3>
+                <p>Employees</p>
+            </div>
+            <a href="{{ url_for('employees') }}" class="stat-link">View All →</a>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+            <a href="{{ url_for('add_department') }}" class="btn btn-primary">➕ Add Department</a>
+            <a href="{{ url_for('add_employee') }}" class="btn btn-primary">➕ Add Employee</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

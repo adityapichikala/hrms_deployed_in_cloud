@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Add Employee - HRMS{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Add New Employee</h1>
+    <a href="{{ url_for('employees') }}" class="btn btn-secondary">← Back to Employees</a>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="form">
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required placeholder="employee@company.com" maxlength="255">
+        </div>
+
+        <div class="form-group">
+            <label for="full_name">Full Name *</label>
+            <input type="text" id="full_name" name="full_name" required placeholder="e.g., John Doe" maxlength="100">
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role *</label>
+            <input type="text" id="role" name="role" required placeholder="e.g., Software Engineer, HR Manager"
+                maxlength="100">
+        </div>
+
+        <div class="form-group">
+            <label for="department_id">Department *</label>
+            <select id="department_id" name="department_id" required>
+                <option value="">-- Select Department --</option>
+                {% for dept in departments %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="is_active">
+                <input type="checkbox" id="is_active" name="is_active" checked>
+                Active Employee
+            </label>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Create Employee</button>
+            <a href="{{ url_for('employees') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
